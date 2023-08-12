@@ -25,7 +25,10 @@ Route::post('/register', [AuthorizeController::class, 'registration']);
 Route::get('/main', [MainController::class, 'ShowMainView'])->name('main');
 Route::get('/Organization', [MainController::class, 'Organization']);
 Route::post('/addToCart', [MainController::class, 'addToCart'])->name('addToCart');
-Route::get('/Organization', [MainController::class, 'Organization'])->name('organization');
+Route::get('/Organization', [MainController::class, 'Organization'])->name('Organization');
+Route::get('/Organization', function () {
+   return redirect('/cart');
+});
 
 //Route::get("/", function(){
    // echo 'все работает';

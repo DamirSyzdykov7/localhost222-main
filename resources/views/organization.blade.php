@@ -5,7 +5,6 @@
 </head>
 <body>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-<form method="POST" action="/main">
     @csrf
     <div class="card pb-4" style="width:auto; height:auto;">
         <div class="card p-5" style="width: auto">
@@ -18,7 +17,7 @@
                         <p class="card-text">{{ $dish->описание}}</p>
                         <form method="POST" action="{{ route('addToCart') }}">
                             @csrf
-                            <input type="hidden" name="dish_id" value="{{ $dish['id'] }}">
+                            <input type="hidden" name="dish_id" value="{{ $dish->id }}">
                         <p><button type="submit">Заказать</button></p>
                         </form>
                     </div>
@@ -36,7 +35,6 @@
             </div>
         </div>
     </div>
-</form>
 
 </body>
 </html>

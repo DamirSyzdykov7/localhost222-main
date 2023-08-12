@@ -10,10 +10,14 @@
     @else
         <ul>
             @foreach ($cartItems as $dishId => $item)
-                <li>{{ $item['name'] }} - Количество: {{ $item['quantity'] }}</li>
+                <li>{{ $item['блюдо'] }} - Количество: {{ $item['quantity'] }} - цена: {{ $item['цена']}}</li>
             @endforeach
         </ul>
     @endif
-    <a href="{{ route('dishes') }}" class="btn btn-primary">Продолжить покупки</a>
+    <form action="{{ route('AddToCard') }}" method="post">
+    @csrf
+    <button type="submit">Заказать</button>
+    </form>
+    <a href="{{ route('addToCart') }}" class="btn btn-primary">Продолжить покупки</a>
 </body>
-</html
+</html>

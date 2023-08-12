@@ -59,4 +59,24 @@ class MainController extends Controller
         return redirect()->route('organization')->with('success', 'Блюдо добавлено в корзину.');
     }
 
+    public function ShowViewCart() {
+        return view('cart');
+    }
+
+    public function makeOrder(Request $request)
+{
+    $cartItems = $request->session()->get('cart');
+
+    if ($cartItems) {
+        // Создание нового заказа в базе данных
+        $order = new Order();
+        $order->items = json_encode($cartItems);
+        $order->save();
+
+        return redirect()->route('cart')->with('success', 'Заказ успешно оформлен.');
+    }
+
+    return redirect()->route('cart')->with('error', 'Ошибка: Корзина пуста.');
+}
+
 }
