@@ -5,16 +5,14 @@
 </head>
 <body>
 <h1>Корзина</h1>
-    @if ($cartItems->isEmpty())
-        <p>Корзина пуста.</p>
-    @else
-        <ul>
-            @foreach ($cartItems as $dishId => $item)
-                <li>{{ $item['блюдо'] }} - Количество: {{ $item['quantity'] }} - цена: {{ $item['цена']}}</li>
-            @endforeach
-        </ul>
-    @endif
-    <form action="{{ route('AddToCard') }}" method="post">
+@if ($cartItems)
+    @foreach ($cartItems as $dishId => $item)
+        <li>{{ $item['блюдо'] }} - цена: {{ $item['цена']}}</li>
+    @endforeach
+@else
+    <p>Корзина пуста.</p>
+@endif
+    <form action="{{ route('addToCart') }}" method="post">
     @csrf
     <button type="submit">Заказать</button>
     </form>

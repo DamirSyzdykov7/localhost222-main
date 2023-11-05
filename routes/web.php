@@ -23,12 +23,10 @@ Route::get('/register', [AuthorizeController::class, 'ShowRegistForm']);
 Route::post('/register', [AuthorizeController::class, 'registration']);
 //Route::get('/main', 'MainController@index');
 Route::get('/main', [MainController::class, 'ShowMainView'])->name('main');
-Route::get('/Organization', [MainController::class, 'Organization']);
 Route::post('/addToCart', [MainController::class, 'addToCart'])->name('addToCart');
 Route::get('/Organization', [MainController::class, 'Organization'])->name('Organization');
-Route::get('/Organization', function () {
-   return redirect('/cart');
-});
+//Route::get('/Cart', [MainController::class, 'showViewCart'])->name('Cart');
+Route::get('/makeOrder', [MainController::class, 'makeOrder'])->name('makeOrder');
 
 //Route::get("/", function(){
    // echo 'все работает';

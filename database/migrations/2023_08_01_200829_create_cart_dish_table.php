@@ -15,10 +15,15 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('dish_id');
+            $table->string('блюдо');
+            $table->string('цена');
             $table->timestamps();
 
             $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
             $table->foreign('dish_id')->references('id')->on('dishes')->onDelete('cascade');
+            //$table->foreign('блюдо')->references('id')->on('dishes')->onDelete('cascade');
+            //$table->foreign('цена')->references('id')->on('dishes')->onDelete('cascade');
+
         });
     }
 

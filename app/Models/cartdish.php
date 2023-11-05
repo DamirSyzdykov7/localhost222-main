@@ -5,13 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Dish extends Model
+class cartdish extends Model
 {
     use HasFactory;
-    protected $table = 'dishes';
+    protected $table = 'cart_dish';
 
-    public function carts()
-    {
-        return $this->belongsToMany(Cart::class);
-    }
 }

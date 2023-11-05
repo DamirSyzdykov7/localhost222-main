@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 use App\Models\SignIn;
 use Illuminate\Support\Facades\Auth;
 use App\Models\organization;
-use App\Models\Cart;
+
 
 
 class MainController extends Controller
@@ -32,9 +33,14 @@ class MainController extends Controller
     {
         $dishId = $request->input('dish_id');
         $dish = Dish::find($dishId);
+        //$quantity = 1;
+        
+
+        $dishName = $dish->блюдо;
+        $price = $dish->цена;
 
         if (!$dish) {
-            return redirect()->route('organization')->with('error', 'Блюдо не найдено.');
+            return redirect()->route('Organization')->with('error', 'Блюдо не найдено.');
         }
 
         // Предположим, что у вас есть текущий авторизованный пользователь
@@ -47,36 +53,35 @@ class MainController extends Controller
         // Получаем корзину пользователя из базы данных или создаем новую, если ее нет
         $cart = Cart::where('user_id', $userId)->first();
         if (!$cart) {
-            $cart = new Cart();
+            $cart = new cart();
             $cart->user_id = $userId;
             $cart->dish_id = $dishId;
             $cart->quantity = 1;
+            $cart->save();
         }
 
         // Добавляем выбранное блюдо в корзину (предполагается, что у вас есть связь "многие ко многим" между Dish и Cart)
-        $cart->Dishes()->attach($dishId);
+        //$cart->Dishes()->attach($dishId);
+        $cart->Dishes()->attach($dishId, ['цена' => $price, 'блюдо' => $dishName]);
 
-        return redirect()->route('organization')->with('success', 'Блюдо добавлено в корзину.');
+
+        return redirect()->route('makeOrder')->with('success', 'Блюдо добавлено в корзину.');
     }
 
-    public function ShowViewCart() {
-        return view('cart');
-    }
 
     public function makeOrder(Request $request)
 {
-    $cartItems = $request->session()->get('cart');
+    $cartItems = $request->session()->get('cart_dish');
 
     if ($cartItems) {
         // Создание нового заказа в базе данных
-        $order = new Order();
+        $order = new cart_dish();
         $order->items = json_encode($cartItems);
         $order->save();
-
-        return redirect()->route('cart')->with('success', 'Заказ успешно оформлен.');
     }
 
-    return redirect()->route('cart')->with('error', 'Ошибка: Корзина пуста.');
+    return view('cart', ['cartItems' => $cartItems, 'dishId => $dishId']);
 }
+
 
 }
