@@ -10,4 +10,9 @@ class SignIn extends Authenticatable
 {
     use HasFactory;
     protected $table = 'SignIn';
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

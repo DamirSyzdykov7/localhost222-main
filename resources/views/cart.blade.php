@@ -5,10 +5,10 @@
 </head>
 <body>
 <h1>Корзина</h1>
-@if ($cartItems)
-    @foreach ($cartItems as $dishId => $item)
-        <li>{{ $item['блюдо'] }} - цена: {{ $item['цена']}}</li>
-    @endforeach
+@if ($cartItems->count() > 0)
+            @foreach ($cartItems as $cartItem)
+                <li>{{ $cartItem->блюдо }} - цена: {{ $cartItem->цена }}</li>
+            @endforeach
 @else
     <p>Корзина пуста.</p>
 @endif
@@ -16,6 +16,6 @@
     @csrf
     <button type="submit">Заказать</button>
     </form>
-    <a href="{{ route('addToCart') }}" class="btn btn-primary">Продолжить покупки</a>
+    <a href="{{ route('main') }}" class="btn btn-primary">Продолжить покупки</a>
 </body>
 </html>

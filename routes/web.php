@@ -27,6 +27,7 @@ Route::post('/addToCart', [MainController::class, 'addToCart'])->name('addToCart
 Route::get('/Organization', [MainController::class, 'Organization'])->name('Organization');
 //Route::get('/Cart', [MainController::class, 'showViewCart'])->name('Cart');
 Route::get('/makeOrder', [MainController::class, 'makeOrder'])->name('makeOrder');
+Route::get('/ShowMainCart', [MainController::class, 'ShowMainCart'])->name('ShowMainCart');
 
 //Route::get("/", function(){
    // echo 'все работает';

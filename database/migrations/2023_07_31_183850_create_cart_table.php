@@ -13,12 +13,18 @@ return new class extends Migration
     {
         Schema::create('cart', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            //$table->unsignedBigInteger('sign_in_id');
+            $table->unsignedBigInteger('sign_in_id');
             $table->unsignedBigInteger('dish_id');
             $table->integer('quantity');
             $table->timestamps();
+
+
+            //$table->foreign('sign_in_id')->references('id')->on('sign_ins');
+
         });
     }
+    
 
     /**
      * Reverse the migrations.

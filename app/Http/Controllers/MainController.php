@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\cartdish;
 use App\Models\Cart;
 use App\Models\Dish;
 use Illuminate\Http\Request;
 use App\Models\SignIn;
 use Illuminate\Support\Facades\Auth;
 use App\Models\organization;
+use Psy\Command\WhereamiCommand;
+
+
 
 
 
@@ -51,10 +55,10 @@ class MainController extends Controller
         }
 
         // Получаем корзину пользователя из базы данных или создаем новую, если ее нет
-        $cart = Cart::where('user_id', $userId)->first();
+        $cart = Cart::where('sign_in_id', $userId)->first();
         if (!$cart) {
             $cart = new cart();
-            $cart->user_id = $userId;
+            $cart->sign_in_id = $userId;
             $cart->dish_id = $dishId;
             $cart->quantity = 1;
             $cart->save();
@@ -71,17 +75,36 @@ class MainController extends Controller
 
     public function makeOrder(Request $request)
 {
-    $cartItems = $request->session()->get('cart_dish');
+    
+    
+    $cartItems = $request->session()->get('cartdish');
 
     if ($cartItems) {
         // Создание нового заказа в базе данных
-        $order = new cart_dish();
+        $order = new cartdish();
         $order->items = json_encode($cartItems);
         $order->save();
     }
+    
 
-    return view('cart', ['cartItems' => $cartItems, 'dishId => $dishId']);
+    return redirect()->route('ShowMainCart')->with('success', 'Блюдо добавлено в корзину.');
+    //return view('cart', ['cartItems' => $cartItems,]);
 }
 
+    public function ShowMainCart(Request $request) {
 
+    // Получаем текущего пользователя
+    $user = Auth::user();
+
+    // Если пользователь авторизован и у него есть корзина
+    if ($user && $user->cart) {
+        // Получаем блюда из корзины текущего пользователя
+        $cartItems = $user->cart->Dishes;
+    } else {
+        $cartItems = [];
+    }
+
+    return view('cart', ['cartItems' => $cartItems]);
+
+    }
 }
