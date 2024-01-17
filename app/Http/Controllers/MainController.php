@@ -39,7 +39,6 @@ class MainController extends Controller
         $dish = Dish::find($dishId);
         //$quantity = 1;
         
-
         $dishName = $dish->блюдо;
         $price = $dish->цена;
 
@@ -88,7 +87,6 @@ class MainController extends Controller
     
 
     return redirect()->route('ShowMainCart')->with('success', 'Блюдо добавлено в корзину.');
-    //return view('cart', ['cartItems' => $cartItems,]);
 }
 
     public function ShowMainCart(Request $request) {
@@ -107,4 +105,31 @@ class MainController extends Controller
     return view('cart', ['cartItems' => $cartItems]);
 
     }
+
+    public function Profile(Request $request) {
+        $user = Auth::user();
+
+        return view('profile', ['user' => $user]);
+        
+    }
+
+    public function ShowSmenaForm() {
+        return view('Smena'); 
+    }
+    
+    public function Smena(Request $request) {
+        $user = Auth::user();
+    
+        $request->validate([
+            'login' => 'required'.$user->id,
+            'password' => 'required'
+        ]);
+    
+        $user->update([
+            'login' => $request->input('login'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+        return view("smena", ['user' => $user,'login' => $user->login,'password' => $user->password,]);
+    }
+    
 }

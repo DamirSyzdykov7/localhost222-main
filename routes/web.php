@@ -28,6 +28,9 @@ Route::get('/Organization', [MainController::class, 'Organization'])->name('Orga
 //Route::get('/Cart', [MainController::class, 'showViewCart'])->name('Cart');
 Route::get('/makeOrder', [MainController::class, 'makeOrder'])->name('makeOrder');
 Route::get('/ShowMainCart', [MainController::class, 'ShowMainCart'])->name('ShowMainCart');
+Route::get('/Profile', [MainController::class, 'Profile'])->name('Profile');
+Route::post('/Smena', [MainController::class, 'Smena'])->name('Smena');
+Route::get('/Smena1', [MainController::class, 'ShowSmenaForm'])->name('Smena1');
 
 //Route::get("/", function(){
    // echo 'все работает';
