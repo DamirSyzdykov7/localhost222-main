@@ -121,7 +121,7 @@ class MainController extends Controller
         $user = Auth::user();
     
         $request->validate([
-            'login' => 'required'.$user->id,
+            'login' => 'required',
             'password' => 'required'
         ]);
     

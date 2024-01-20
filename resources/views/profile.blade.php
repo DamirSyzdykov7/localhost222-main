@@ -5,16 +5,17 @@
 </head>
 <body>
 <h1>Профиль</h1>
+    <form method="post" action="Smena">
+        @csrf
     @if($user)
-        <p>логин: {{ $user->login }}</p>
-        <p>пароль: {{ $user->password }}</p>
+        <p><input type="text" name="login" value="{{ $user->login }}" readonly></p>
+        <p><textarea name="password"  class="form-control"readonly >{{$user->password}}</textarea></p>
+    @else 
+        echo "oshibea"
     @endif
-        <button type="submit" class="mt-3" onclick="redirectToSmena1()">изменить</button>
+    <button type="submit" class="mt-3">изменить</button>
 
-<script>
-function redirectToSmena1() {
-    window.location.href = "/Smena1";
-}
-</script>
+</form>
+
 </body>
 </html>

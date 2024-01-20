@@ -9,12 +9,12 @@
     @csrf
     @method('patch')
     <div class="mb-3">
-            <label for="name" class="name">login</label>
-            <textarea name="name"  class="form-control" required>{{$user->login}}</textarea>
+            <label for="login" class="name">login</label>
+            <textarea name="login"  class="form-control" required>{{$user->login}}</textarea>
         </div>
         <div class="mb-3">
-            <label for="name" class="name">name</label>
-            <textarea name="name"  class="form-control" required>{{$user->password}}</textarea>
+            <label for="password" class="name">name</label>
+            <textarea name="password"  class="form-control" required>{{$user->password}}</textarea>
         </div>
         <button>подтвердить</button>
 </form>

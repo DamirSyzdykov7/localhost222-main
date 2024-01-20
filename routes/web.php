@@ -29,8 +29,8 @@ Route::get('/Organization', [MainController::class, 'Organization'])->name('Orga
 Route::get('/makeOrder', [MainController::class, 'makeOrder'])->name('makeOrder');
 Route::get('/ShowMainCart', [MainController::class, 'ShowMainCart'])->name('ShowMainCart');
 Route::get('/Profile', [MainController::class, 'Profile'])->name('Profile');
-Route::post('/Smena', [MainController::class, 'Smena'])->name('Smena');
-Route::get('/Smena1', [MainController::class, 'ShowSmenaForm'])->name('Smena1');
+Route::match(['post', 'patch'], '/Smena', [MainController::class, 'Smena'])->name('Smena');
+Route::get('/ShowSmenaForm', [MainController::class, 'ShowSmenaForm'])->name('ShowSmenaForm');
 
 //Route::get("/", function(){
    // echo 'все работает';
