@@ -13,5 +13,9 @@ class Cart extends Model
     {
         return $this->belongsToMany(Dish::class);
     }
+    public function _dop_dannye()
+    {
+        return $this->belongsTo(_dop_dannye::class);
+    }
 
 }

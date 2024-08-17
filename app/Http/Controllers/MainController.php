@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\_dop_dannye;
 use App\Models\cartdish;
 use App\Models\Cart;
 use App\Models\Dish;
@@ -106,10 +107,29 @@ class MainController extends Controller
 
     }
 
+    public function ShowProfile() {
+        return view('profile');
+    }
+    
     public function Profile(Request $request) {
         $user = Auth::user();
+        $user1 = Auth::user()->id;
+        $cart = Auth::user()->cart->id;
+        $table = _dop_dannye::where('login_id' , $user1)->first();
+        if(!$table) {
+            $table = new _dop_dannye();
+            $table->login_id = $user1;
+            $table->cart_id = $cart;
+            $table->имя = $request->input('name', 'Defoult');
+            $table->Фамилия = $request->input('lastname','Defoult');
+            $table->номер_телефона = $request->input('phone','Defoult');
+            $table->адресс = $request->input('adress' , 'Defoult');
+            $table->дата_рождения = $request->input('birth_day', '00.00.00');
+            $table->save();
+        }
 
-        return view('profile', ['user' => $user]);
+
+        return view('profile', ['user' => $user , 'user1' => $user1 , 'table'=> $table , 'cart'=>$cart]);
         
     }
 
@@ -129,7 +149,7 @@ class MainController extends Controller
             'login' => $request->input('login'),
             'password' => bcrypt($request->input('password')),
         ]);
-        return view("smena", ['user' => $user,'login' => $user->login,'password' => $user->password,]);
+        return view("smena", ['user' => $user,'login' => $user->login,]);
     }
-    
+
 }

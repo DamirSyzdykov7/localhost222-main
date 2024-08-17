@@ -28,7 +28,8 @@ Route::get('/Organization', [MainController::class, 'Organization'])->name('Orga
 //Route::get('/Cart', [MainController::class, 'showViewCart'])->name('Cart');
 Route::get('/makeOrder', [MainController::class, 'makeOrder'])->name('makeOrder');
 Route::get('/ShowMainCart', [MainController::class, 'ShowMainCart'])->name('ShowMainCart');
-Route::get('/Profile', [MainController::class, 'Profile'])->name('Profile');
+Route::get('/ShowProfile', [MainController::class, 'ShowProfile'])->name('profileView');
+Route::post('/Profile', [MainController::class, 'Profile'])->name('Profile');
 Route::match(['post', 'patch'], '/Smena', [MainController::class, 'Smena'])->name('Smena');
 Route::get('/ShowSmenaForm', [MainController::class, 'ShowSmenaForm'])->name('ShowSmenaForm');
 

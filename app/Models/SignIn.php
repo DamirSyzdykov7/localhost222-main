@@ -17,4 +17,8 @@ class SignIn extends Authenticatable
     {
         return $this->hasOne(Cart::class);
     }
+    public function _dop_dannye()
+    {
+        return $this->belongsTo(_dop_dannye::class);
+    }
 }
